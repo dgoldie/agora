@@ -23,9 +23,9 @@
 
 | Schema | Key fields |
 |---|---|
-| `Catalog.Category` | `name`, `slug`, `icon` |
-| `Catalog.Listing` | `title`, `description`, `price_cents`, `status` (`draft/active/sold`), `category_id`, `seller_id` |
-| `Orders.Order` | `listing_id`, `buyer_id`, `status` (`pending/paid/cancelled`), `stripe_session_id`, `amount_cents` |
+| `Catalog.Category` | `name`, `slug`, `icon` | ✅ |
+| `Catalog.Listing` | `title`, `description`, `price_cents`, `status` (`draft/active/sold`), `category_id`, `seller_id` | ✅ |
+| `Orders.Order` | `listing_id`, `buyer_id`, `status` (`pending/paid/cancelled`), `stripe_session_id`, `amount_cents` | ✅ |
 
 ---
 
