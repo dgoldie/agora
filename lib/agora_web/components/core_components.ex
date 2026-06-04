@@ -426,6 +426,125 @@ defmodule AgoraWeb.CoreComponents do
   end
 
   @doc """
+  Renders a styled call-to-action link with animated arrow or icon.
+
+  ## Variants
+
+    * `:primary`  — filled pill, white arrow slides right on hover
+    * `:ghost`    — transparent pill with border, arrow slides right on hover
+    * `:arrow`    — plain text link, arrow icon slides right on hover
+    * `:back`     — plain text link, arrow slides left on hover
+
+  ## Examples
+
+      <.cta_link navigate={~p"/listings"}>See all listings</.cta_link>
+      <.cta_link navigate={~p"/listings"} variant={:ghost}>View all</.cta_link>
+      <.cta_link navigate={~p"/listings"} variant={:back}>Back to listings</.cta_link>
+      <.cta_link patch={~p"/listings"} variant={:arrow} icon="hero-x-mark-micro">Clear filters</.cta_link>
+  """
+  attr :navigate, :string, default: nil
+  attr :patch, :string, default: nil
+  attr :href, :string, default: nil
+  attr :variant, :atom, default: :arrow, values: [:primary, :ghost, :arrow, :back]
+  attr :icon, :string, default: nil
+  attr :class, :string, default: nil
+  attr :rest, :global
+  slot :inner_block, required: true
+
+  def cta_link(%{variant: :primary} = assigns) do
+    ~H"""
+    <.link
+      navigate={@navigate}
+      patch={@patch}
+      href={@href}
+      class={[
+        "inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm",
+        "bg-primary text-primary-content shadow-md",
+        "hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]",
+        "transition-all duration-200 group",
+        @class
+      ]}
+      {@rest}
+    >
+      <span :if={@icon}><span class={[@icon, "size-4"]} /></span>
+      {render_slot(@inner_block)}
+      <span class="translate-x-0 group-hover:translate-x-1 transition-transform duration-200">
+        <span class="hero-arrow-right-micro size-4" />
+      </span>
+    </.link>
+    """
+  end
+
+  def cta_link(%{variant: :ghost} = assigns) do
+    ~H"""
+    <.link
+      navigate={@navigate}
+      patch={@patch}
+      href={@href}
+      class={[
+        "inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm",
+        "border border-base-300 text-base-content",
+        "hover:border-primary hover:text-primary hover:bg-primary/5",
+        "transition-all duration-200 group",
+        @class
+      ]}
+      {@rest}
+    >
+      <span :if={@icon}><span class={[@icon, "size-4"]} /></span>
+      {render_slot(@inner_block)}
+      <span class="translate-x-0 group-hover:translate-x-1 transition-transform duration-200">
+        <span class="hero-arrow-right-micro size-4 opacity-60" />
+      </span>
+    </.link>
+    """
+  end
+
+  def cta_link(%{variant: :arrow} = assigns) do
+    ~H"""
+    <.link
+      navigate={@navigate}
+      patch={@patch}
+      href={@href}
+      class={[
+        "inline-flex items-center gap-1.5 font-semibold text-sm text-primary",
+        "hover:underline underline-offset-4 group",
+        "transition-all duration-200",
+        @class
+      ]}
+      {@rest}
+    >
+      <span :if={@icon}><span class={[@icon, "size-4"]} /></span>
+      {render_slot(@inner_block)}
+      <span class="translate-x-0 group-hover:translate-x-1 transition-transform duration-200">
+        <span class="hero-arrow-right-micro size-4" />
+      </span>
+    </.link>
+    """
+  end
+
+  def cta_link(%{variant: :back} = assigns) do
+    ~H"""
+    <.link
+      navigate={@navigate}
+      patch={@patch}
+      href={@href}
+      class={[
+        "inline-flex items-center gap-1.5 font-medium text-sm text-base-content/60",
+        "hover:text-base-content group",
+        "transition-all duration-200",
+        @class
+      ]}
+      {@rest}
+    >
+      <span class="translate-x-0 group-hover:-translate-x-1 transition-transform duration-200">
+        <span class="hero-arrow-left-micro size-4" />
+      </span>
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
+  @doc """
   Renders a [Heroicon](https://heroicons.com).
 
   Heroicons come in three styles – outline, solid, and mini.

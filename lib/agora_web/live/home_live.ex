@@ -29,17 +29,17 @@ defmodule AgoraWeb.HomeLive do
             Discover unique items from sellers near you — or list your own in under a minute.
           </p>
           <div class="flex flex-wrap justify-center gap-3 pt-2">
-            <.link navigate={~p"/listings"} class="btn btn-neutral btn-lg rounded-full shadow-lg">
-              <.icon name="hero-magnifying-glass-micro" class="size-5" /> Browse listings
-            </.link>
+            <.cta_link navigate={~p"/listings"} variant={:primary} class="btn-neutral text-white shadow-lg !bg-white/20 !border-white/30 hover:!bg-white/30">
+              Browse listings
+            </.cta_link>
             <%= if @current_scope && @current_scope.user do %>
-              <.link navigate={~p"/listings/new"} class="btn btn-outline btn-lg rounded-full border-white/40 text-white hover:bg-white/20 hover:border-white">
-                <.icon name="hero-plus-micro" class="size-5" /> Sell something
-              </.link>
+              <.cta_link navigate={~p"/listings/new"} variant={:ghost} class="!border-white/40 !text-white hover:!bg-white/20 hover:!border-white">
+                Sell something
+              </.cta_link>
             <% else %>
-              <.link navigate={~p"/users/register"} class="btn btn-outline btn-lg rounded-full border-white/40 text-white hover:bg-white/20 hover:border-white">
+              <.cta_link navigate={~p"/users/register"} variant={:ghost} class="!border-white/40 !text-white hover:!bg-white/20 hover:!border-white">
                 Start selling free
-              </.link>
+              </.cta_link>
             <% end %>
           </div>
         </div>
@@ -49,7 +49,7 @@ defmodule AgoraWeb.HomeLive do
       <section :if={@categories != []}>
         <div class="flex items-center justify-between mb-5">
           <h2 class="text-2xl font-bold">Browse by Category</h2>
-          <.link navigate={~p"/listings"} class="link link-primary text-sm">View all</.link>
+          <.cta_link navigate={~p"/listings"} variant={:arrow}>View all</.cta_link>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           <.link
@@ -69,7 +69,7 @@ defmodule AgoraWeb.HomeLive do
       <section :if={@listings != []}>
         <div class="flex items-center justify-between mb-5">
           <h2 class="text-2xl font-bold">Recent Listings</h2>
-          <.link navigate={~p"/listings"} class="link link-primary text-sm">See all</.link>
+          <.cta_link navigate={~p"/listings"} variant={:arrow}>See all</.cta_link>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <.listing_card :for={listing <- Enum.take(@listings, 8)} listing={listing} />
@@ -81,9 +81,9 @@ defmodule AgoraWeb.HomeLive do
         <div class="text-6xl">🛍️</div>
         <h3 class="text-xl font-semibold">No listings yet</h3>
         <p class="text-base-content/60">Be the first to sell something on Agora.</p>
-        <.link navigate={~p"/listings/new"} class="btn btn-primary rounded-full mt-2">
+        <.cta_link navigate={~p"/listings/new"} variant={:primary} class="mt-2">
           Create a listing
-        </.link>
+        </.cta_link>
       </section>
 
       <%!-- How it works --%>

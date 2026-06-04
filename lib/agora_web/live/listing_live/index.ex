@@ -52,9 +52,9 @@ defmodule AgoraWeb.ListingLive.Index do
           <h1 class="text-3xl font-bold">Browse Listings</h1>
           <p class="text-base-content/50 text-sm mt-1">{length(@listings)} listing{if length(@listings) != 1, do: "s"} found</p>
         </div>
-        <.link :if={@current_scope && @current_scope.user} navigate={~p"/listings/new"} class="btn btn-primary rounded-full shrink-0">
-          <.icon name="hero-plus-micro" class="size-4" /> New Listing
-        </.link>
+        <.cta_link :if={@current_scope && @current_scope.user} navigate={~p"/listings/new"} variant={:primary} class="shrink-0">
+          New Listing
+        </.cta_link>
       </div>
 
       <%!-- Search bar --%>
@@ -99,7 +99,7 @@ defmodule AgoraWeb.ListingLive.Index do
           <span :if={@category_id && @search != ""}> + </span>
           <strong :if={@search != ""}>"{@search}"</strong>
         </span>
-        <.link patch={~p"/listings"} class="btn btn-xs btn-ghost ml-auto">Clear</.link>
+        <.cta_link patch={~p"/listings"} variant={:ghost} icon="hero-x-mark-micro" class="ml-auto !py-1 !px-3 text-xs">Clear</.cta_link>
       </div>
 
       <%!-- Grid --%>
@@ -136,7 +136,7 @@ defmodule AgoraWeb.ListingLive.Index do
         <div class="text-6xl">🔍</div>
         <h3 class="text-xl font-semibold">No listings found</h3>
         <p class="text-base-content/60">Try a different search term or category.</p>
-        <.link patch={~p"/listings"} class="btn btn-ghost rounded-full mt-2">Clear filters</.link>
+        <.cta_link patch={~p"/listings"} variant={:ghost} class="mt-2">Clear filters</.cta_link>
       </div>
     </div>
     """

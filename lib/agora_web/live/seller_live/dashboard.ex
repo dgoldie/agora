@@ -42,9 +42,7 @@ defmodule AgoraWeb.SellerLive.Dashboard do
           <h1 class="text-3xl font-bold">My Listings</h1>
           <p class="text-base-content/50 text-sm mt-1">Manage everything you're selling</p>
         </div>
-        <.link navigate={~p"/listings/new"} class="btn btn-primary rounded-full">
-          <.icon name="hero-plus-micro" class="size-4" /> New Listing
-        </.link>
+        <.cta_link navigate={~p"/listings/new"} variant={:primary}>New Listing</.cta_link>
       </div>
 
       <%!-- Stats row --%>
@@ -72,7 +70,7 @@ defmodule AgoraWeb.SellerLive.Dashboard do
         <div class="text-6xl">🏷️</div>
         <h3 class="text-xl font-semibold">No listings yet</h3>
         <p class="text-base-content/60">Create your first listing and start selling today.</p>
-        <.link navigate={~p"/listings/new"} class="btn btn-primary rounded-full mt-2">Create a listing</.link>
+        <.cta_link navigate={~p"/listings/new"} variant={:primary} class="mt-2">Create a listing</.cta_link>
       </div>
 
       <%!-- Listings table --%>

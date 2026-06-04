@@ -59,9 +59,7 @@ defmodule AgoraWeb.ListingLive.Show do
   def render(assigns) do
     ~H"""
     <div class="max-w-4xl mx-auto space-y-8">
-      <.link navigate={~p"/listings"} class="btn btn-ghost btn-sm rounded-full -ml-2">
-        <.icon name="hero-arrow-left-micro" class="size-4" /> Back to listings
-      </.link>
+      <.cta_link navigate={~p"/listings"} variant={:back}>Back to listings</.cta_link>
 
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <%!-- Left: image --%>
@@ -124,9 +122,9 @@ defmodule AgoraWeb.ListingLive.Show do
                 </div>
 
               <% is_own_listing?(@current_scope, @listing) -> %>
-                <.link navigate={~p"/my/listings"} class="btn btn-outline w-full rounded-full">
-                  <.icon name="hero-pencil-square-micro" class="size-4" /> Manage your listings
-                </.link>
+                <.cta_link navigate={~p"/my/listings"} variant={:ghost} class="w-full justify-center">
+                  Manage your listings
+                </.cta_link>
 
               <% @current_scope && @current_scope.user -> %>
                 <button class="btn btn-primary btn-lg w-full rounded-full shadow-lg" phx-click="buy_now">
@@ -134,9 +132,9 @@ defmodule AgoraWeb.ListingLive.Show do
                 </button>
 
               <% true -> %>
-                <.link navigate={~p"/users/log-in"} class="btn btn-primary btn-lg w-full rounded-full">
+                <.cta_link navigate={~p"/users/log-in"} variant={:primary} class="w-full justify-center btn-lg">
                   Log in to buy
-                </.link>
+                </.cta_link>
             <% end %>
           </div>
 

@@ -37,9 +37,7 @@ defmodule AgoraWeb.BuyerLive.Orders do
         <div class="text-6xl">🛍️</div>
         <h3 class="text-xl font-semibold">No orders yet</h3>
         <p class="text-base-content/60">Find something you love and make your first purchase.</p>
-        <.link navigate={~p"/listings"} class="btn btn-primary rounded-full mt-2">
-          <.icon name="hero-magnifying-glass-micro" class="size-4" /> Browse listings
-        </.link>
+        <.cta_link navigate={~p"/listings"} variant={:primary} class="mt-2">Browse listings</.cta_link>
       </div>
 
       <%!-- Order cards --%>

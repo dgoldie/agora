@@ -104,9 +104,10 @@
 
 Replace plain `link` text with styled animated CTAs throughout the app:
 
-- [ ] **HomeLive** — "Browse listings" + "See all" → pill buttons with arrow icon + hover slide animation
-- [ ] **ListingLive.Index** — "Clear filters" → ghost pill with × icon
-- [ ] **ListingLive.Show** — "Back to listings" → animated back arrow with underline on hover
-- [ ] **SellerLive.Dashboard** — "Manage your listings" CTA → outline pill with pencil icon
-- [ ] **BuyerLive.Orders** — "Browse listings" empty-state CTA → gradient pill button
-- [ ] **Global** — Introduce a reusable `<.cta_link>` component in `core_components.ex` with variants: `:primary`, `:ghost`, `:arrow` so all CTAs stay consistent
+- [x] **HomeLive** — "Browse listings" + "See all" → pill buttons with arrow icon + hover slide animation
+- [x] **ListingLive.Index** — "Clear filters" → ghost pill with × icon; "New Listing" → primary pill
+- [x] **ListingLive.Show** — "Back to listings" → animated back arrow; "Manage your listings" + "Log in to buy" → cta_link
+- [x] **SellerLive.Dashboard** — "New Listing" + "Create a listing" → primary pill CTAs
+- [x] **BuyerLive.Orders** — "Browse listings" empty-state → primary pill CTA
+- [x] **ListingLive.New** — "Cancel" → back variant
+- [x] **Global** — `<.cta_link>` component in `core_components.ex`, variants: `:primary`, `:ghost`, `:arrow`, `:back` — sliding arrow animation via Tailwind group-hover

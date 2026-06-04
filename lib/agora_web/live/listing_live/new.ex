@@ -155,7 +155,7 @@ defmodule AgoraWeb.ListingLive.New do
           <button type="submit" class="btn btn-primary btn-lg rounded-full flex-1 shadow-md">
             <.icon name="hero-check-micro" class="size-5" /> Create Listing
           </button>
-          <.link navigate={~p"/my/listings"} class="btn btn-ghost btn-lg rounded-full">Cancel</.link>
+          <.cta_link navigate={~p"/my/listings"} variant={:back}>Cancel</.cta_link>
         </div>
       </.form>
     </div>
