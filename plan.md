@@ -33,12 +33,12 @@
 
 | Route | LiveView | Purpose |
 |---|---|---|
-| `/` | `HomeLive` | Featured listings, category nav |
-| `/listings` | `ListingLive.Index` | Browse + filter by category/search |
-| `/listings/:id` | `ListingLive.Show` | Detail + Buy Now button |
-| `/listings/new` | `ListingLive.New` | Seller creates listing |
-| `/my/listings` | `SellerLive.Dashboard` | Seller manages their listings |
-| `/my/orders` | `BuyerLive.Orders` | Buyer sees order history |
+| `/` | `HomeLive` | Featured listings, category nav | ✅ |
+| `/listings` | `ListingLive.Index` | Browse + filter by category/search | ✅ |
+| `/listings/:id` | `ListingLive.Show` | Detail + Buy Now button | ✅ |
+| `/listings/new` | `ListingLive.New` | Seller creates listing | ✅ |
+| `/my/listings` | `SellerLive.Dashboard` | Seller manages their listings | ✅ |
+| `/my/orders` | `BuyerLive.Orders` | Buyer sees order history | ✅ |
 
 ---
 

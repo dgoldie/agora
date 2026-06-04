@@ -64,6 +64,38 @@ defmodule AgoraWeb.UserAuth do
 
   Will reissue the session token if it is older than the configured age.
   """
+  def on_mount(:mount_current_scope, _params, session, socket) do
+    {:cont, mount_current_scope(socket, session)}
+  end
+
+  def on_mount(:require_authenticated_user, _params, session, socket) do
+    socket = mount_current_scope(socket, session)
+
+    if socket.assigns.current_scope && socket.assigns.current_scope.user do
+      {:cont, socket}
+    else
+      socket =
+        socket
+        |> Phoenix.LiveView.put_flash(:error, "You must log in to access this page.")
+        |> Phoenix.LiveView.redirect(to: ~p"/users/log-in")
+
+      {:halt, socket}
+    end
+  end
+
+  defp mount_current_scope(socket, session) do
+    Phoenix.Component.assign_new(socket, :current_scope, fn ->
+      if token = session["user_token"] do
+        case Accounts.get_user_by_session_token(token) do
+          {user, _} -> Scope.for_user(user)
+          nil -> Scope.for_user(nil)
+        end
+      else
+        Scope.for_user(nil)
+      end
+    end)
+  end
+
   def fetch_current_scope_for_user(conn, _opts) do
     with {token, conn} <- ensure_user_token(conn),
          {user, token_inserted_at} <- Accounts.get_user_by_session_token(token) do

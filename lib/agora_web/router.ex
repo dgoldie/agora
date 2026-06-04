@@ -17,10 +17,28 @@ defmodule AgoraWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", AgoraWeb do
-    pipe_through :browser
+  ## Public marketplace routes
+  live_session :public,
+    on_mount: [{AgoraWeb.UserAuth, :mount_current_scope}] do
+    scope "/", AgoraWeb do
+      pipe_through :browser
 
-    get "/", PageController, :home
+      live "/", HomeLive
+      live "/listings", ListingLive.Index
+      live "/listings/:id", ListingLive.Show
+    end
+  end
+
+  ## Authenticated seller/buyer routes
+  live_session :require_authenticated_user,
+    on_mount: [{AgoraWeb.UserAuth, :require_authenticated_user}] do
+    scope "/", AgoraWeb do
+      pipe_through [:browser, :require_authenticated_user]
+
+      live "/listings/new", ListingLive.New
+      live "/my/listings", SellerLive.Dashboard
+      live "/my/orders", BuyerLive.Orders
+    end
   end
 
   # Other scopes may use custom stacks.
