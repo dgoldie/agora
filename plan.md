@@ -13,9 +13,9 @@
 
 ## Phase 2 — Auth
 
-- [ ] `mix phx.gen.auth Accounts User users`
-- [ ] `mix ecto.migrate`
-- [ ] Add `:display_name` and `:bio` fields to users (seller profile basics)
+- [x] `mix phx.gen.auth Accounts User users`
+- [x] `mix ecto.migrate`
+- [x] Add `:display_name` and `:bio` fields to users (seller profile basics)
 
 ---
 
