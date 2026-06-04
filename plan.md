@@ -55,3 +55,41 @@
 - [x] Seed categories + sample listings
 - [x] Image upload (LiveView + local storage or S3)
 - [x] Basic reviews (1–5 stars, text)
+
+---
+
+## Phase 7 — DaisyUI Design Overhaul
+
+### Global
+- [ ] Pick a DaisyUI theme (e.g. `night`, `cupcake`, or custom) set in `root.html.heex`
+- [ ] Navbar: logo wordmark, sticky top bar, mobile hamburger menu
+- [ ] Footer: links, branding, social icons
+
+### Home (`HomeLive`)
+- [ ] Hero section: gradient background, bold headline, CTA buttons with icons
+- [ ] Category pills: styled `badge` row with hover effects
+- [ ] Listing grid: `card` with shadow, image placeholder, price badge overlay
+
+### Browse (`ListingLive.Index`)
+- [ ] Filter bar: sticky sidebar or top filter strip (category + search)
+- [ ] Listing cards: uniform height, image top, price + category badge
+- [ ] Empty state: illustrated empty message
+
+### Listing Detail (`ListingLive.Show`)
+- [ ] Image hero: full-width rounded image or placeholder
+- [ ] Price + Buy Now: prominent CTA with `btn-primary btn-lg`
+- [ ] Seller card: avatar initial, name, member since
+- [ ] Reviews: star display with filled/empty icons, review cards with avatars
+
+### Create Listing (`ListingLive.New`)
+- [ ] Stepped card layout with section headers
+- [ ] Upload zone: styled drop area with icon
+- [ ] Price input: dollar prefix inside input
+
+### Seller Dashboard (`SellerLive.Dashboard`)
+- [ ] Stats row: total listings, active, draft, sold counts
+- [ ] Status badges: color-coded `badge-success/warning/error`
+
+### Buyer Orders (`BuyerLive.Orders`)
+- [ ] Order cards with status timeline indicator
+- [ ] Empty state with browse CTA
