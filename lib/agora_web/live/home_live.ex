@@ -17,14 +17,21 @@ defmodule AgoraWeb.HomeLive do
   def render(assigns) do
     ~H"""
     <div class="space-y-16">
+      <%!-- Wordmark --%>
+      <div class="pt-4 text-center">
+        <h1 class="text-6xl sm:text-8xl font-black tracking-tighter text-base-content/90 leading-none select-none">
+          Agora
+        </h1>
+        <p class="text-base-content/40 text-sm mt-2 tracking-widest uppercase font-medium">The marketplace for everything</p>
+      </div>
+
       <%!-- Hero --%>
       <section class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary to-accent px-8 py-20 text-center text-primary-content shadow-xl">
         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_30%_20%,white,transparent_60%)]" />
         <div class="relative space-y-6 max-w-2xl mx-auto">
-          <div class="badge badge-ghost badge-lg font-medium opacity-80">✨ The marketplace for everything</div>
-          <h1 class="text-5xl sm:text-6xl font-black tracking-tight leading-tight">
+          <h2 class="text-5xl sm:text-6xl font-black tracking-tight leading-tight">
             Buy and Sell<br /><span class="opacity-90">Anything.</span>
-          </h1>
+          </h2>
           <p class="text-lg opacity-80">
             Discover unique items from sellers near you — or list your own in under a minute.
           </p>
