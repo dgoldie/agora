@@ -97,3 +97,16 @@
 - [x] Order cards with colored left stripe by status
 - [x] Listing thumbnail in each order card
 - [x] Empty state with browse CTA
+
+---
+
+## Phase 8 — Sexy "View All" Links
+
+Replace plain `link` text with styled animated CTAs throughout the app:
+
+- [ ] **HomeLive** — "Browse listings" + "See all" → pill buttons with arrow icon + hover slide animation
+- [ ] **ListingLive.Index** — "Clear filters" → ghost pill with × icon
+- [ ] **ListingLive.Show** — "Back to listings" → animated back arrow with underline on hover
+- [ ] **SellerLive.Dashboard** — "Manage your listings" CTA → outline pill with pencil icon
+- [ ] **BuyerLive.Orders** — "Browse listings" empty-state CTA → gradient pill button
+- [ ] **Global** — Introduce a reusable `<.cta_link>` component in `core_components.ex` with variants: `:primary`, `:ghost`, `:arrow` so all CTAs stay consistent
