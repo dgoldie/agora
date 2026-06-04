@@ -9,6 +9,7 @@ defmodule Agora.Catalog.Listing do
     field :description, :string
     field :price_cents, :integer
     field :status, :string, default: "draft"
+    field :image_url, :string
 
     belongs_to :category, Agora.Catalog.Category
     belongs_to :seller, Agora.Accounts.User
@@ -19,7 +20,7 @@ defmodule Agora.Catalog.Listing do
   @doc false
   def changeset(listing, attrs) do
     listing
-    |> cast(attrs, [:title, :description, :price_cents, :status, :category_id, :seller_id])
+    |> cast(attrs, [:title, :description, :price_cents, :status, :category_id, :seller_id, :image_url])
     |> validate_required([:title, :price_cents, :category_id, :seller_id])
     |> validate_length(:title, min: 3, max: 200)
     |> validate_number(:price_cents, greater_than: 0)

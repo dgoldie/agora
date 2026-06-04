@@ -52,6 +52,6 @@
 
 ## Phase 6 — Polish
 
-- [ ] Seed categories + sample listings
-- [ ] Image upload (LiveView + local storage or S3)
-- [ ] Basic reviews (1–5 stars, text)
+- [x] Seed categories + sample listings
+- [x] Image upload (LiveView + local storage or S3)
+- [x] Basic reviews (1–5 stars, text)
