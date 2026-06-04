@@ -85,7 +85,7 @@ defmodule AgoraWeb.Layouts do
     </header>
 
     <main class="flex-1 px-4 py-8 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl">
+      <div class="mx-auto max-w-7xl border-x border-base-200 px-4 sm:px-8 lg:px-12 rounded-b-xl">
         {render_slot(@inner_block)}
       </div>
     </main>
