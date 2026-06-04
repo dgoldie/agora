@@ -112,3 +112,4 @@ Replace plain `link` text with styled animated CTAs throughout the app:
 - [x] **ListingLive.New** — "Cancel" → back variant
 - [x] **Global** — `<.cta_link>` component in `core_components.ex`, variants: `:primary`, `:ghost`, `:arrow`, `:back` — sliding arrow animation via Tailwind group-hover
 - [x] **Layout** — Add subtle left and right border lines to the main content area to frame the page on wide screens
+- [ ] **HomeLive** — Add a prominent "Agora" wordmark/title above the hero section
