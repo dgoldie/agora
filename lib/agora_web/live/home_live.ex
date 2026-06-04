@@ -18,11 +18,15 @@ defmodule AgoraWeb.HomeLive do
     ~H"""
     <div class="space-y-16">
       <%!-- Wordmark --%>
-      <div class="pt-4 text-center">
-        <h1 class="text-6xl sm:text-8xl font-black tracking-tighter text-base-content/90 leading-none select-none">
+      <div class="pt-4 text-center space-y-3">
+        <h1 class="text-7xl sm:text-9xl font-black tracking-tighter leading-none select-none bg-gradient-to-br from-primary via-accent to-primary bg-clip-text text-transparent drop-shadow-sm">
           Agora
         </h1>
-        <p class="text-base-content/40 text-sm mt-2 tracking-widest uppercase font-medium">The marketplace for everything</p>
+        <div class="flex items-center justify-center gap-3">
+          <span class="h-px w-12 bg-gradient-to-r from-transparent to-base-content/20" />
+          <p class="text-base-content/40 text-xs tracking-[0.3em] uppercase font-semibold">The marketplace for everything</p>
+          <span class="h-px w-12 bg-gradient-to-l from-transparent to-base-content/20" />
+        </div>
       </div>
 
       <%!-- Hero --%>
