@@ -57,9 +57,6 @@ defmodule AgoraWeb.Router do
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
 
-    scope "/tidewave" do
-      forward "/", Tidewave
-    end
   end
 
   ## Authentication routes
