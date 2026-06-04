@@ -35,39 +35,64 @@ defmodule AgoraWeb.Layouts do
 
   def app(assigns) do
     ~H"""
-    <header class="navbar px-4 sm:px-6 lg:px-8 border-b border-base-200">
-      <div class="flex-1">
-        <.link navigate={~p"/"} class="flex w-fit items-center gap-2 font-bold text-xl">
-          Agora
+    <header class="navbar sticky top-0 z-50 bg-base-100/90 backdrop-blur border-b border-base-200 px-4 sm:px-6 lg:px-8 shadow-sm">
+      <div class="flex-1 gap-2">
+        <.link navigate={~p"/"} class="flex items-center gap-2 group">
+          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-content font-black text-sm">A</div>
+          <span class="font-bold text-lg tracking-tight hidden sm:block">Agora</span>
         </.link>
-        <nav class="ml-8 hidden sm:flex gap-2">
-          <.link navigate={~p"/listings"} class="btn btn-ghost btn-sm">Browse</.link>
+        <div class="divider divider-horizontal mx-1 hidden sm:flex" />
+        <nav class="hidden sm:flex gap-1">
+          <.link navigate={~p"/listings"} class="btn btn-ghost btn-sm rounded-full">
+            <.icon name="hero-squares-2x2-micro" class="size-4" /> Browse
+          </.link>
           <%= if @current_scope && @current_scope.user do %>
-            <.link navigate={~p"/listings/new"} class="btn btn-ghost btn-sm">Sell</.link>
-            <.link navigate={~p"/my/listings"} class="btn btn-ghost btn-sm">My Listings</.link>
-            <.link navigate={~p"/my/orders"} class="btn btn-ghost btn-sm">My Orders</.link>
+            <.link navigate={~p"/listings/new"} class="btn btn-ghost btn-sm rounded-full">
+              <.icon name="hero-plus-circle-micro" class="size-4" /> Sell
+            </.link>
           <% end %>
         </nav>
       </div>
+
       <div class="flex-none flex items-center gap-2">
         <.theme_toggle />
         <%= if @current_scope && @current_scope.user do %>
-          <span class="text-sm hidden sm:block">{@current_scope.user.email}</span>
-          <.link href={~p"/users/log-out"} method="delete" class="btn btn-ghost btn-sm">
-            Log out
-          </.link>
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar placeholder">
+              <div class="bg-primary text-primary-content rounded-full w-8 flex items-center justify-center font-bold text-sm">
+                {String.first(@current_scope.user.display_name || @current_scope.user.email) |> String.upcase()}
+              </div>
+            </div>
+            <ul tabindex="0" class="dropdown-content menu menu-sm bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow-lg border border-base-200">
+              <li class="menu-title text-xs truncate px-3 py-1">{@current_scope.user.email}</li>
+              <li><.link navigate={~p"/my/listings"}><.icon name="hero-tag-micro" class="size-4" /> My Listings</.link></li>
+              <li><.link navigate={~p"/my/orders"}><.icon name="hero-shopping-bag-micro" class="size-4" /> My Orders</.link></li>
+              <li><.link navigate={~p"/users/settings"}><.icon name="hero-cog-6-tooth-micro" class="size-4" /> Settings</.link></li>
+              <li class="border-t border-base-200 mt-1 pt-1">
+                <.link href={~p"/users/log-out"} method="delete" class="text-error">
+                  <.icon name="hero-arrow-right-on-rectangle-micro" class="size-4" /> Log out
+                </.link>
+              </li>
+            </ul>
+          </div>
         <% else %>
           <.link navigate={~p"/users/log-in"} class="btn btn-ghost btn-sm">Log in</.link>
-          <.link navigate={~p"/users/register"} class="btn btn-primary btn-sm">Register</.link>
+          <.link navigate={~p"/users/register"} class="btn btn-primary btn-sm rounded-full">
+            Get started
+          </.link>
         <% end %>
       </div>
     </header>
 
-    <main class="px-4 py-8 sm:px-6 lg:px-8">
+    <main class="flex-1 px-4 py-8 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-7xl">
         {render_slot(@inner_block)}
       </div>
     </main>
+
+    <footer class="footer footer-center p-6 bg-base-200 text-base-content/60 text-sm border-t border-base-300 mt-auto">
+      <p>© {Date.utc_today().year} Agora — Buy and Sell Anything</p>
+    </footer>
 
     <.flash_group flash={@flash} />
     """

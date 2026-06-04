@@ -61,35 +61,39 @@
 ## Phase 7 — DaisyUI Design Overhaul
 
 ### Global
-- [ ] Pick a DaisyUI theme (e.g. `night`, `cupcake`, or custom) set in `root.html.heex`
-- [ ] Navbar: logo wordmark, sticky top bar, mobile hamburger menu
-- [ ] Footer: links, branding, social icons
+- [x] Sticky navbar: logo, avatar dropdown, theme toggle, mobile-friendly
+- [x] Footer: branding + year
+- [x] `min-h-screen flex flex-col` body for footer anchoring
 
 ### Home (`HomeLive`)
-- [ ] Hero section: gradient background, bold headline, CTA buttons with icons
-- [ ] Category pills: styled `badge` row with hover effects
-- [ ] Listing grid: `card` with shadow, image placeholder, price badge overlay
+- [x] Hero section: gradient background, bold headline, CTA buttons with icons
+- [x] Category grid: icon + label cards with hover effects
+- [x] Listing grid: `card` with shadow, image/placeholder, price
+- [x] How it works: 3-step explainer section
 
 ### Browse (`ListingLive.Index`)
-- [ ] Filter bar: sticky sidebar or top filter strip (category + search)
-- [ ] Listing cards: uniform height, image top, price + category badge
-- [ ] Empty state: illustrated empty message
+- [x] Filter bar: category pill strip + search join input
+- [x] Listing cards: uniform image square, price, category badge
+- [x] Active filter banner with clear button
+- [x] Empty state: illustrated with clear-filters CTA
 
 ### Listing Detail (`ListingLive.Show`)
-- [ ] Image hero: full-width rounded image or placeholder
-- [ ] Price + Buy Now: prominent CTA with `btn-primary btn-lg`
-- [ ] Seller card: avatar initial, name, member since
-- [ ] Reviews: star display with filled/empty icons, review cards with avatars
+- [x] Two-column layout: image left, details right
+- [x] Price + Buy Now: prominent CTA with `btn-primary btn-lg rounded-full`
+- [x] Seller card: avatar initial, name, bio
+- [x] Reviews: DaisyUI `rating` input, star display, avatar initials, review cards
 
 ### Create Listing (`ListingLive.New`)
-- [ ] Stepped card layout with section headers
-- [ ] Upload zone: styled drop area with icon
-- [ ] Price input: dollar prefix inside input
+- [x] Stepped card layout with section headers
+- [x] Upload zone: styled drop area with icon + progress bar
+- [x] Price input: dollar prefix label inside input
 
 ### Seller Dashboard (`SellerLive.Dashboard`)
-- [ ] Stats row: total listings, active, draft, sold counts
-- [ ] Status badges: color-coded `badge-success/warning/error`
+- [x] Stats row: total, active, draft, sold with color-coded cards
+- [x] Thumbnail in table rows
+- [x] Status badges: color-coded `badge-success/warning/error`
 
 ### Buyer Orders (`BuyerLive.Orders`)
-- [ ] Order cards with status timeline indicator
-- [ ] Empty state with browse CTA
+- [x] Order cards with colored left stripe by status
+- [x] Listing thumbnail in each order card
+- [x] Empty state with browse CTA

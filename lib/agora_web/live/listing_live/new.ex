@@ -24,12 +24,7 @@ defmodule AgoraWeb.ListingLive.New do
 
   def handle_event("validate", %{"listing" => params}, socket) do
     params = dollars_to_cents(params)
-
-    changeset =
-      %Listing{}
-      |> Catalog.change_listing(params)
-      |> Map.put(:action, :validate)
-
+    changeset = %Listing{} |> Catalog.change_listing(params) |> Map.put(:action, :validate)
     {:noreply, assign_form(socket, changeset)}
   end
 
@@ -66,87 +61,114 @@ defmodule AgoraWeb.ListingLive.New do
 
   def render(assigns) do
     ~H"""
-    <div class="max-w-2xl mx-auto">
-      <h1 class="text-2xl font-bold mb-6">Create a New Listing</h1>
+    <div class="max-w-2xl mx-auto space-y-6">
+      <div>
+        <h1 class="text-3xl font-bold">Create a Listing</h1>
+        <p class="text-base-content/50 mt-1">Fill in the details below to list your item for sale.</p>
+      </div>
 
-      <.form for={@form} phx-change="validate" phx-submit="save" class="space-y-4">
-        <.input field={@form[:title]} label="Title" placeholder="What are you selling?" />
-        <.input field={@form[:description]} type="textarea" label="Description" placeholder="Describe your item..." />
+      <.form for={@form} phx-change="validate" phx-submit="save" class="space-y-6">
 
-        <div class="grid grid-cols-2 gap-4">
-          <.input
-            field={@form[:price_cents]}
-            label="Price ($)"
-            type="number"
-            name="listing[price_dollars]"
-            value={cents_to_dollars(@form[:price_cents].value)}
-            min="0.01"
-            step="0.01"
-            placeholder="0.00"
-          />
-
-          <.input
-            field={@form[:category_id]}
-            type="select"
-            label="Category"
-            options={[{"Select a category...", ""} | Enum.map(@categories, &{&1.name, &1.id})]}
-          />
+        <%!-- Section: Basic info --%>
+        <div class="card bg-base-100 border border-base-200 rounded-2xl">
+          <div class="card-body gap-4">
+            <h2 class="font-semibold text-base-content/70 uppercase text-xs tracking-wider">Basic Info</h2>
+            <.input field={@form[:title]} label="Title" placeholder="What are you selling?" />
+            <.input field={@form[:description]} type="textarea" label="Description" placeholder="Describe your item — condition, specs, why you're selling..." />
+          </div>
         </div>
 
-        <.input
-          field={@form[:status]}
-          type="select"
-          label="Status"
-          options={[{"Draft (not visible)", "draft"}, {"Active (visible to buyers)", "active"}]}
-        />
+        <%!-- Section: Pricing & Category --%>
+        <div class="card bg-base-100 border border-base-200 rounded-2xl">
+          <div class="card-body gap-4">
+            <h2 class="font-semibold text-base-content/70 uppercase text-xs tracking-wider">Pricing & Category</h2>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control">
+                <label class="label"><span class="label-text">Price</span></label>
+                <label class="input input-bordered flex items-center gap-2">
+                  <span class="text-base-content/50 font-medium">$</span>
+                  <input
+                    type="number"
+                    name="listing[price_dollars]"
+                    value={cents_to_dollars(@form[:price_cents].value)}
+                    min="0.01"
+                    step="0.01"
+                    placeholder="0.00"
+                    class="grow"
+                  />
+                </label>
+              </div>
+              <.input
+                field={@form[:category_id]}
+                type="select"
+                label="Category"
+                options={[{"Select...", ""} | Enum.map(@categories, &{"#{&1.icon} #{&1.name}", &1.id})]}
+              />
+            </div>
+            <.input
+              field={@form[:status]}
+              type="select"
+              label="Visibility"
+              options={[{"Draft — save but don't publish yet", "draft"}, {"Active — visible to buyers now", "active"}]}
+            />
+          </div>
+        </div>
 
-        <div class="form-control">
-          <label class="label"><span class="label-text">Photo (optional)</span></label>
-          <div
-            class="border-2 border-dashed border-base-300 rounded-lg p-6 text-center cursor-pointer hover:border-primary transition-colors"
-            phx-drop-target={@uploads.image.ref}
-          >
-            <.live_file_input upload={@uploads.image} class="hidden" />
-            <p class="text-base-content/50 text-sm">
-              Drop an image here or
-              <label for={@uploads.image.ref} class="link cursor-pointer">click to browse</label>
+        <%!-- Section: Photo --%>
+        <div class="card bg-base-100 border border-base-200 rounded-2xl">
+          <div class="card-body gap-4">
+            <h2 class="font-semibold text-base-content/70 uppercase text-xs tracking-wider">Photo (optional)</h2>
+            <div
+              class="border-2 border-dashed border-base-300 rounded-xl p-10 text-center hover:border-primary/50 hover:bg-primary/5 transition-colors cursor-pointer"
+              phx-drop-target={@uploads.image.ref}
+            >
+              <.live_file_input upload={@uploads.image} class="hidden" />
+              <div class="space-y-2">
+                <div class="text-4xl">📷</div>
+                <p class="font-medium text-sm">
+                  Drop your photo here or
+                  <label for={@uploads.image.ref} class="link link-primary cursor-pointer">browse files</label>
+                </p>
+                <p class="text-xs text-base-content/40">JPG, PNG, WEBP · max 8MB</p>
+              </div>
+            </div>
+
+            <div :for={entry <- @uploads.image.entries} class="flex items-center gap-4 p-3 bg-base-200 rounded-xl">
+              <.live_img_preview entry={entry} class="w-16 h-16 object-cover rounded-lg" />
+              <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium truncate">{entry.client_name}</p>
+                <progress class="progress progress-primary w-full mt-1" value={entry.progress} max="100" />
+              </div>
+              <button type="button" phx-click="cancel_upload" phx-value-ref={entry.ref} class="btn btn-circle btn-ghost btn-sm">
+                <.icon name="hero-x-mark-micro" class="size-4" />
+              </button>
+            </div>
+
+            <p :for={err <- upload_errors(@uploads.image)} class="text-error text-sm">
+              {upload_error_to_string(err)}
             </p>
-            <p class="text-xs text-base-content/40 mt-1">JPG, PNG, WEBP up to 8MB</p>
           </div>
-
-          <div :for={entry <- @uploads.image.entries} class="flex items-center gap-3 mt-2">
-            <.live_img_preview entry={entry} class="w-16 h-16 object-cover rounded" />
-            <div class="flex-1 text-sm truncate">{entry.client_name}</div>
-            <button type="button" phx-click="cancel_upload" phx-value-ref={entry.ref} class="btn btn-xs btn-ghost">
-              ✕
-            </button>
-          </div>
-
-          <p :for={err <- upload_errors(@uploads.image)} class="text-error text-sm mt-1">
-            {upload_error_to_string(err)}
-          </p>
         </div>
 
-        <div class="flex gap-3 pt-2">
-          <button type="submit" class="btn btn-primary">Create Listing</button>
-          <.link navigate={~p"/my/listings"} class="btn btn-ghost">Cancel</.link>
+        <%!-- Actions --%>
+        <div class="flex gap-3">
+          <button type="submit" class="btn btn-primary btn-lg rounded-full flex-1 shadow-md">
+            <.icon name="hero-check-micro" class="size-5" /> Create Listing
+          </button>
+          <.link navigate={~p"/my/listings"} class="btn btn-ghost btn-lg rounded-full">Cancel</.link>
         </div>
       </.form>
     </div>
     """
   end
 
-  defp assign_form(socket, changeset) do
-    assign(socket, :form, to_form(changeset, as: :listing))
-  end
+  defp assign_form(socket, changeset), do: assign(socket, :form, to_form(changeset, as: :listing))
 
   defp dollars_to_cents(%{"price_dollars" => dollars} = params) do
-    cents =
-      case Float.parse(to_string(dollars)) do
-        {val, _} -> round(val * 100)
-        :error -> nil
-      end
-
+    cents = case Float.parse(to_string(dollars)) do
+      {val, _} -> round(val * 100)
+      :error -> nil
+    end
     Map.put(params, "price_cents", cents)
   end
 
