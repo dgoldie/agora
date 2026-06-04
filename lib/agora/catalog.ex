@@ -88,6 +88,12 @@ defmodule Agora.Catalog do
     Listing.changeset(listing, attrs)
   end
 
+  def update_listing_status(%Listing{} = listing, status) do
+    listing
+    |> Listing.changeset(%{status: status})
+    |> Repo.update()
+  end
+
   # ---------------------------------------------------------------------------
   # Private query helpers
   # ---------------------------------------------------------------------------

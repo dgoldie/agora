@@ -44,9 +44,9 @@
 
 ## Phase 5 — Stripe Checkout
 
-- [ ] Add `stripity_stripe` hex dep
-- [ ] On "Buy Now" → create `Checkout.Session`, redirect to Stripe
-- [ ] Webhook handler for `checkout.session.completed` → mark order `paid`, mark listing `sold`
+- [x] Add `stripity_stripe` hex dep
+- [x] On "Buy Now" → create `Checkout.Session`, redirect to Stripe
+- [x] Webhook handler for `checkout.session.completed` → mark order `paid`, mark listing `sold`
 
 ---
 

@@ -12,6 +12,16 @@ defmodule AgoraWeb.BuyerLive.Orders do
      |> assign(:orders, orders)}
   end
 
+  def handle_params(%{"payment" => "success"}, _uri, socket) do
+    {:noreply, put_flash(socket, :info, "Payment successful! Your order is confirmed.")}
+  end
+
+  def handle_params(%{"payment" => "cancelled"}, _uri, socket) do
+    {:noreply, put_flash(socket, :info, "Payment cancelled.")}
+  end
+
+  def handle_params(_params, _uri, socket), do: {:noreply, socket}
+
   def render(assigns) do
     ~H"""
     <div class="space-y-6">

@@ -1,7 +1,7 @@
 defmodule AgoraWeb.ListingLive.Show do
   use AgoraWeb, :live_view
 
-  alias Agora.Catalog
+  alias Agora.{Catalog, Payments}
 
   def mount(%{"id" => id}, _session, socket) do
     listing = Catalog.get_listing!(id)
@@ -64,8 +64,13 @@ defmodule AgoraWeb.ListingLive.Show do
   end
 
   def handle_event("buy_now", _params, socket) do
-    # Stripe Checkout wired in Phase 5
-    {:noreply, put_flash(socket, :info, "Stripe Checkout coming in Phase 5!")}
+    case Payments.create_checkout_session(socket.assigns.current_scope, socket.assigns.listing) do
+      {:ok, checkout_url} ->
+        {:noreply, redirect(socket, external: checkout_url)}
+
+      {:error, _reason} ->
+        {:noreply, put_flash(socket, :error, "Could not start checkout. Please try again.")}
+    end
   end
 
   defp is_own_listing?(nil, _listing), do: false

@@ -17,6 +17,12 @@ defmodule AgoraWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/stripe", AgoraWeb do
+    pipe_through :api
+
+    post "/webhooks", StripeWebhookController, :handle
+  end
+
   ## Public marketplace routes
   live_session :public,
     on_mount: [{AgoraWeb.UserAuth, :mount_current_scope}] do

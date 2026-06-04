@@ -56,8 +56,8 @@ if config_env() == :prod do
 
   config :agora, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
-  config :agora, :stripe,
-    secret_key:
+  config :stripity_stripe,
+    api_key:
       System.get_env("STRIPE_SECRET_KEY") ||
         raise("environment variable STRIPE_SECRET_KEY is missing."),
     webhook_secret:
