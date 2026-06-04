@@ -40,7 +40,7 @@ defmodule AgoraWeb.Router do
     end
 
     scope "/tidewave" do
-      forward "/", Tidewave.Plug
+      forward "/", Tidewave
     end
   end
 
